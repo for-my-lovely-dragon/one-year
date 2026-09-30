@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>1st Year of Us ♡</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+      background: #171916;
+      color: #ffe500;
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    /* YOUR CASSETTE PHOTO */
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+
+      background-image:
+        linear-gradient(
+          rgba(20, 20, 15, 0.18),
+          rgba(20, 20, 15, 0.18)
+        ),
+        url("IMG_2768.JPG");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.20);
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+
+      padding: 28px 5vw;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      position: relative;
+    }
+
+    .top-line {
+      width: 100%;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: clamp(12px, 1.5vw, 22px);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .content {
+      width: min(850px, 92vw);
+
+      margin: auto;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-family: "Rye", serif;
+
+      font-size: clamp(45px, 7vw, 100px);
+
+      line-height: 0.9;
+
+      margin: 0 0 18px;
+
+      text-transform: uppercase;
+
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      font-family: "Rye", serif;
+
+      font-size: clamp(24px, 3.5vw, 48px);
+
+      line-height: 1;
+
+      margin: 0 0 28px;
+
+      text-transform: uppercase;
+    }
+
+    .message {
+      max-width: 650px;
+
+      font-size: clamp(16px, 1.7vw, 23px);
+
+      line-height: 1.45;
+
+      font-weight: 500;
+
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .question {
+      margin-top: 25px;
+
+      font-size: clamp(19px, 2.2vw, 30px);
+
+      font-weight: 700;
+    }
+
+    .buttons {
+      margin-top: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: clamp(50px, 10vw, 130px);
+
+      width: 100%;
+
+      min-height: 100px;
+
+      position: relative;
+    }
+
+    button {
+      border: 0;
+
+      background: transparent;
+
+      color: #ffe500;
+
+      cursor: pointer;
+
+      font-family: "Rye", serif;
+
+      font-size: clamp(40px, 6vw, 80px);
+
+      padding: 5px 15px;
+
+      transition:
+        transform 0.25s ease,
+        font-size 0.25s ease;
+
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+
+      touch-action: manipulation;
+    }
+
+    #yesButton {
+      z-index: 5;
+    }
+
+    #noButton {
+      z-index: 4;
+    }
+
+    /* SECOND PAGE */
+
+    #renewedPage {
+      display: none;
+    }
+
+    #renewedPage .content {
+      max-width: 900px;
+    }
+
+    .plan {
+      font-size: clamp(15px, 1.6vw, 21px);
+
+      line-height: 1.45;
+
+      text-align: left;
+
+      margin-top: 5px;
+    }
+
+    .plan div {
+      margin: 5px 0;
+    }
+
+    .infinity {
+      font-family: "Rye", serif;
+
+      font-size: clamp(40px, 6vw, 75px);
+
+      margin: 25px 0;
+    }
+
+    .thank-you {
+      font-size: clamp(17px, 2vw, 25px);
+
+      font-weight: 500;
+
+      line-height: 1.4;
+    }
+
+    /* KISSES */
+
+    .kiss {
+      position: fixed;
+
+      width: clamp(55px, 8vw, 110px);
+
+      height: auto;
+
+      pointer-events: none;
+
+      z-index: 10;
+
+      animation:
+        kissFloat 3.5s ease-out forwards;
+    }
+
+    @keyframes kissFloat {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          scale(0.2)
+          rotate(0deg);
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(
+            var(--move-x),
+            var(--move-y)
+          )
+          scale(1.2)
+          rotate(var(--rotation));
+      }
+    }
+
+
+    /* PHONE VERSION */
+
+    @media (max-width: 700px) {
+
+      .background {
+
+        /*
+          The mobile version flips the
+          cassette vertically.
+        */
+
+        transform: scaleY(-1);
+
+        background-size: cover;
+
+        background-position: center;
+      }
+
+      .background::after {
+        transform: scaleY(-1);
+      }
+
+      .page {
+        padding: 20px 18px;
+      }
+
+      .top-line {
+        font-size: 10px;
+      }
+
+      .content {
+        width: 92vw;
+      }
+
+      h1 {
+        font-size: clamp(40px, 12vw, 65px);
+      }
+
+      h2 {
+        font-size: clamp(22px, 7vw, 38px);
+
+        margin-bottom: 22px;
+      }
+
+      .message {
+        max-width: 340px;
+
+        font-size: 15px;
+      }
+
+      .question {
+        font-size: 18px;
+
+        margin-top: 20px;
+      }
+
+      .buttons {
+        gap: 35px;
+
+        margin-top: 18px;
+      }
+
+      button {
+        font-size: 46px;
+      }
+
+      .plan {
+        width: 90%;
+
+        font-size: 14px;
+      }
+
+      .infinity {
+        font-size: 42px;
+
+        margin: 18px 0;
+      }
+
+      .thank-you {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div class="background"></div>
+
+
+  <!-- PAGE 1 -->
+
+  <main
+    class="page"
+    id="questionPage"
+  >
+
+    <div class="top-line">
+
+      <span>
+        1ST YEAR OF US
+      </span>
+
+      <span>
+        SUBSCRIPTION RENEWAL
+      </span>
+
+    </div>
+
+
+    <div class="content">
+
+      <h1>
+        1ST YEAR<br>
+        OF US
+      </h1>
+
+
+      <h2>
+        SUBSCRIPTION RENEWAL
+      </h2>
+
+
+      <div class="message">
+
+        Today, we made it through<br>
+        our first year together.<br><br>
+
+        365 days of hugs, kisses,<br>
+        silly jokes and GIFs, deep talks,<br>
+        little moments, big adventures<br>
+        and a whole lot of love.
+
+      </div>
+
+
+      <div class="question">
+
+        Would you like to continue?
+
+      </div>
+
+
+      <div class="buttons">
+
+        <button id="yesButton">
+          YES
+        </button>
+
+        <button id="noButton">
+          NO
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- PAGE 2 -->
+
+  <main
+    class="page"
+    id="renewedPage"
+  >
+
+    <div class="top-line">
+
+      <span>
+        1ST YEAR OF US
+      </span>
+
+      <span>
+        SUBSCRIPTION RENEWED SUCCESSFULLY ♡
+      </span>
+
+    </div>
+
+
+    <div class="content">
+
+      <h2>
+
+        SUBSCRIPTION RENEWED<br>
+        SUCCESSFULLY ♡
+
+      </h2>
+
+
+      <div class="message">
+
+        Your subscription to <strong>US</strong><br>
+
+        has been successfully renewed.
+
+      </div>
+
+
+      <div
+        class="message"
+        style="margin-top: 20px;"
+      >
+
+        Your new plan includes:
+
+      </div>
+
+
+      <div class="plan">
+
+        <div>♡ unlimited hugs</div>
+
+        <div>♡ unlimited kisses</div>
+
+        <div>♡ endless talks</div>
+
+        <div>♡ new adventures</div>
+
+        <div>♡ an unreasonable amount of GIFs</div>
+
+        <div>♡ making even more memories together</div>
+
+        <div>♡ and, of course...</div>
+
+      </div>
+
+
+      <div class="infinity">
+
+        ∞ + 2 LOVE
+
+      </div>
+
+
+      <div class="thank-you">
+
+        Thank you for choosing me<br>
+
+        for another year 💕
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    const yesButton =
+      document.getElementById("yesButton");
+
+    const noButton =
+      document.getElementById("noButton");
+
+    const questionPage =
+      document.getElementById("questionPage");
+
+    const renewedPage =
+      document.getElementById("renewedPage");
+
+
+    let yesScale = 1;
+
+
+    /*
+      DESKTOP:
+
+      NO runs away when
+      the mouse gets close.
+    */
+
+    function escapeNoButton(event) {
+
+      if (window.innerWidth <= 700) {
+        return;
+      }
+
+
+      const rect =
+        noButton.getBoundingClientRect();
+
+
+      const distance =
+        Math.sqrt(
+
+          Math.pow(
+            event.clientX -
+            (rect.left + rect.width / 2),
+            2
+          )
+
+          +
+
+          Math.pow(
+            event.clientY -
+            (rect.top + rect.height / 2),
+            2
+          )
+
+        );
+
+
+      if (distance < 130) {
+
+        moveNoButton();
+
+        growYes();
+
+      }
+
+    }
+
+
+    function moveNoButton() {
+
+      const padding = 40;
+
+
+      const maxX =
+        window.innerWidth -
+        noButton.offsetWidth -
+        padding;
+
+
+      const maxY =
+        window.innerHeight -
+        noButton.offsetHeight -
+        padding;
+
+
+      const x =
+        Math.max(
+          padding,
+          Math.random() * maxX
+        );
+
+
+      const y =
+        Math.max(
+          padding,
+          Math.random() * maxY
+        );
+
+
+      noButton.style.position =
+        "fixed";
+
+
+      noButton.style.left =
+        x + "px";
+
+
+      noButton.style.top =
+        y + "px";
+
+    }
+
+
+    /*
+      YES grows.
+    */
+
+    function growYes() {
+
+      yesScale += 0.18;
+
+
+      yesButton.style.transform =
+        `scale(${yesScale})`;
+
+    }
+
+
+    document.addEventListener(
+      "mousemove",
+      escapeNoButton
+    );
+
+
+    /*
+      PHONE:
+
+      NO doesn't actually work.
+      Tapping it makes YES bigger.
+    */
+
+    noButton.addEventListener(
+      "click",
+      function(event) {
+
+        event.preventDefault();
+
+        growYes();
+
+
+        if (window.innerWidth <= 700) {
+
+          noButton.style.transform =
+            "translateX(" +
+            (Math.random() * 30 - 15) +
+            "px)";
+
+        }
+
+      }
+    );
+
+
+    /*
+      YES opens PAGE 2.
+    */
+
+    yesButton.addEventListener(
+      "click",
+      function() {
+
+        questionPage.style.display =
+          "none";
+
+        renewedPage.style.display =
+          "flex";
+
+        createKisses();
+
+      }
+    );
+
+
+    /*
+      KISS ANIMATION
+
+      Uses YOUR file:
+
+      IMG_2770.PNG
+    */
+
+    function createKisses() {
+
+      for (let i = 0; i < 45; i++) {
+
+        const kiss =
+          document.createElement("img");
+
+
+        kiss.src =
+          "IMG_2770.PNG";
+
+
+        kiss.className =
+          "kiss";
+
+
+        kiss.style.left =
+          Math.random() *
+          window.innerWidth +
+          "px";
+
+
+        kiss.style.top =
+          Math.random() *
+          window.innerHeight +
+          "px";
+
+
+        kiss.style.setProperty(
+          "--move-x",
+          (Math.random() * 400 - 200) +
+          "px"
+        );
+
+
+        kiss.style.setProperty(
+          "--move-y",
+          (Math.random() * 500 - 250) +
+          "px"
+        );
+
+
+        kiss.style.setProperty(
+          "--rotation",
+          (Math.random() * 80 - 40) +
+          "deg"
+        );
+
+
+        kiss.style.animationDelay =
+          Math.random() * 1.5 +
+          "s";
+
+
+        document.body.appendChild(kiss);
+
+
+        setTimeout(
+          () => kiss.remove(),
+          5500
+        );
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
